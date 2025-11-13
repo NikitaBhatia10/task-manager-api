@@ -1,62 +1,36 @@
-Task Manager API
+# Task Manager API
 
-A secure and modern Task Management REST API built using FastAPI, SQLAlchemy, and JWT authentication.
-It supports user registration, login, and protected task management routes.
+A backend API built with **FastAPI** that provides secure user authentication and task management.
 
-Features:
+## Features
+- User Signup and Login with JWT-based authentication
+- Password hashing and verification (Passlib)
+- SQLAlchemy ORM integration (SQLite database)
+- Modular architecture: models, schemas, auth, jwt_handler, database
+- Environment variable management using `.env`
+- Interactive API docs powered by FastAPI’s Swagger UI
+- In-progress: Protected routes for user-specific task access
 
-User signup and login
-Secure JWT authentication
-Create, Read, Update, Delete (CRUD) tasks
-Each user can access only their own tasks
-SQLite database (can easily switch to PostgreSQL/MySQL)
-Automatic API documentation with Swagger UI
-
-Tech Stack:
-
-Backend Framework  - 	  FastAPI
-Database ORM       - 	  SQLAlchemy
-Authentication     - 	  JWT (via python-jose)
-Password Hashing   - 	  Passlib Bcrypt
-Server             - 	  Uvicorn
-
-
- Installation & Setup:
+## Tech Stack
+**Backend:** Python, FastAPI, SQLAlchemy, JWT, Passlib  
+**Database:** SQLite (local dev)  
+**Docs & Testing:** Swagger UI 
  
-1. Clone the repository
-git clone https://github.com/<your-username>/task-manager-api.git
+
+## Endpoints
+| Method 	| Endpoint 		| Description 					|
+|---------------|-----------------------|-----------------------------------------------|
+| POST 		| `/signup` 		| Create a new user 				|
+| POST 		| `/login` 		| Login and get JWT access token 		|
+| GET  		| `/tasks/protected` 	| Access user-protected tasks (JWT required)	|
+
+## Installation
+
+git clone https://github.com/NikitaBhatia10/task-manager-api.git
 cd task-manager-api
-
-2️. Create a virtual environment
-python -m venv venv
-
-
-Activate it:
-
-Windows
-
-venv\Scripts\activate
-
-
-Mac/Linux
-
-source venv/bin/activate
-
-3️. Install dependencies
 pip install -r requirements.txt
-
-
-If you don’t have a requirements.txt yet, you can create one:
-
-pip freeze > requirements.txt
-
-4️. Run the app
 uvicorn main:app --reload
 
-
-Open in browser:
-http://127.0.0.1:8000/docs
- (Swagger UI)
 
 Authentication Flow
 
@@ -126,10 +100,6 @@ API Endpoints Overview:
 Method	          Endpoint	                              Description	                        Auth Required
 POST               /signup	                              Register a new user	                  ❌
 POST	             /login	                                Login and get JWT token	              ❌
-GET	               /tasks	                                Get all tasks                        	✅
-POST	             /tasks	                                Create a new task	                    ✅
-PUT	               /tasks/{id}	                          Update a task	                        ✅
-DELETE	           /tasks/{id}	                          Delete a task	                        ✅
 GET	               /tasks/protected	                      Example of secured endpoint	          ✅
 
 
